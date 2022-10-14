@@ -1,0 +1,13 @@
+﻿<Window x:Class="DooGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DooGame"
+        mc:Ignorable="d"
+        Title="Doo Game" Height="450" Width="800">
+    <Canvas Name="mainCanvas" Focusable="True" Background="LightBlue" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
+        <!--<Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="background1" Height="400" Width="1262" Fill="Orange" />
+        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="background2" Height="400" Width="1262" Fill="LightGreen" Canvas.Left="1262" />-->
+    </Canvas>
+</Window>
