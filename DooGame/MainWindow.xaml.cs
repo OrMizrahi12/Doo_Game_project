@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,62 +17,107 @@ using System.Windows.Threading;
 
 namespace DooGame
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private PhysicsDecor ground = new PhysicsDecor();
-        private Player player = new Player();
-
-
+        PhysicsDecor decor = new PhysicsDecor();
+        Player player = new Player();
         DispatcherTimer GameTimer = new DispatcherTimer();
+        GoblinEnemy goblinEnemy = new GoblinEnemy();
+        EyeEnemy eyeEnemy = new EyeEnemy();
+        GiftPlayer giftPlayer = new GiftPlayer();
 
         public MainWindow()
         {
             InitializeComponent();
             InitialGame();
-            ground.InitialDecor(mainCanvas);
-            player.InitialPlayer(mainCanvas);          
+            ResetGame();
         }
 
         private void InitialGame()
-        {
+        { 
             mainCanvas.Focus();
             GameTimer.Tick += GameEngine;
             GameTimer.Interval = TimeSpan.FromMilliseconds(20);
-            GameTimer.Start();
         }
 
         private void GameEngine(object sender, EventArgs e)
         {
-            ground.SetGroundRects();
+            decor.SetGroundRects();
             player.SetPlayerRects();
-            ground.GroundPhysics(player);
-            player.PlayerMoveController(ground);
-            ground.NoveScreen(player);
-            ground.MakeBackGroundInfinity();
-            ground.GroundLocator(player);
+            giftPlayer.SetGiftsRect();
+            goblinEnemy.SetGoblinRect();
+            eyeEnemy.SetEyeEnemyRect();
+            decor.GroundPhysics(player, GameTimer,mainCanvas);
+            player.PlayerMoveController(mainCanvas, player);
+            decor.MoveScreen(player, goblinEnemy, eyeEnemy, giftPlayer);
+            decor.MakeBackGroundInfinity();
+            decor.GroundLocator(player);
+            decor.MoveDecor(player, GameTimer);
+            goblinEnemy.GoblinController(player, decor, GameTimer);
+            eyeEnemy.EyeEnemyController(player, decor, GameTimer);
+            giftPlayer.PlayerGiftTouchEvent(player, decor);
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Right)
-               player.playrRigth = true;
-            if (e.Key == Key.Left)
+            if (e.Key == Key.Right) 
+            {
+                player.playrRigth = true;
+            } 
+            else if (e.Key == Key.Left)
+            {
                 player.playerLeft = true;
-            if (e.Key == Key.Space)
+            }
+            else if (e.Key == Key.Space) 
+            {
                 player.playerJump = true;
+            }
+            else if (e.Key == Key.V)
+            {
+                player.playerShooter = true;
+            }
+            else if (e.Key == Key.D)
+            {
+                player.playerAttack = true;
+            }
+            else if (e.Key == Key.Enter)
+            {
+                ResetGame();
+            }
         }
-
+        
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Right)
+            {
                 player.playrRigth = false;
-            if (e.Key == Key.Left)
+            }
+            else if (e.Key == Key.Left)
+            {
                 player.playerLeft = false;
-            if (e.Key == Key.Space)
+            }
+            else if (e.Key == Key.Space)
+            {
                 player.playerJump = false;
+            }
+            else if (e.Key == Key.D)
+            {
+                player.playerAttack = false;
+            }  
+        }
+
+        private void ResetGame()
+        {
+            mainCanvas.Children.Clear();
+            decor.InitialDecor(mainCanvas);
+            player.InitialPlayer(mainCanvas);
+            goblinEnemy.InitialGoblin(mainCanvas);
+            eyeEnemy.InitialEyeEnemy(mainCanvas);
+            giftPlayer.InitialGifts(mainCanvas, decor);
+            GameTimer.Start();
         }
     }
 }
+
+
+

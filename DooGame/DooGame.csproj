@@ -63,6 +63,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EyeEnemy.cs" />
+    <Compile Include="GiftPlayer.cs" />
+    <Compile Include="GoblinEnemy.cs" />
     <Compile Include="PhysicsDecor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -104,6 +107,192 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\coinImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\coinImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\G.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\blockFromUpImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\blockFromDownImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\playerWalk_R_4.png" />
+    <Resource Include="images\playerWalk_L_6.png" />
+    <Resource Include="images\playerWalk_R_6.png" />
+    <Resource Include="images\playerWalk_L_7.png" />
+    <Resource Include="images\playerWalk_R_7.png" />
+    <Resource Include="images\playerWalk_L_8.png" />
+    <Resource Include="images\playerWalk_R_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\playerWalk_L_3.png" />
+    <Resource Include="images\playerWalk_R_3.png" />
+    <Resource Include="images\playerWalk_L_4.png" />
+    <Resource Include="images\playerWalk_L_1.png" />
+    <Resource Include="images\playerWalk_L_2.png" />
+    <Resource Include="images\playerWalk_L_5.png" />
+    <Resource Include="images\playerWalk_R_1.png" />
+    <Resource Include="images\playerWalk_R_2.png" />
+    <Resource Include="images\playerWalk_R_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\War.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\figmQY.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ground1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Attack1_L_.png" />
+    <Resource Include="images\Attack1_R_.png" />
+    <Resource Include="images\Attack2_L_.png" />
+    <Resource Include="images\Attack2_R_.png" />
+    <Resource Include="images\Attack3_L_.png" />
+    <Resource Include="images\Attack3_R_.png" />
+    <Resource Include="images\Attack4_L_.png" />
+    <Resource Include="images\Attack4_R_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\flor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L1.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L2.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L3.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L4.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L5.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L6.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L7.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_L8.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R1.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R2.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R3.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R4.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R5.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R6.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R7.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_walk_R8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L1.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L2.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L3.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L4.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L5.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L6.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L7.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_L8.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R1.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R2.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R3.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R4.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R5.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R6.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R7.png" />
+    <Resource Include="images\goblin%28enemy%29\goblin_attack_R8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\eye%28enemy%29\eye_attack_L1.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_L2.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_L3.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_L4.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_L5.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_L6.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_L7.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_L8.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R1.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R2.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R3.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R4.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R5.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R6.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R7.png" />
+    <Resource Include="images\eye%28enemy%29\eye_attack_R8.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L1.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L2.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L3.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L4.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L5.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L6.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L7.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_L8.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R1.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R2.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R3.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R4.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R5.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R6.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R7.png" />
+    <Resource Include="images\eye%28enemy%29\eye_flight_R8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\player\player_walk\player_run_L1.png" />
+    <Resource Include="images\player\player_walk\player_run_L2.png" />
+    <Resource Include="images\player\player_walk\player_run_L3.png" />
+    <Resource Include="images\player\player_walk\player_run_L4.png" />
+    <Resource Include="images\player\player_walk\player_run_L5.png" />
+    <Resource Include="images\player\player_walk\player_run_L6.png" />
+    <Resource Include="images\player\player_walk\player_run_L7.png" />
+    <Resource Include="images\player\player_walk\player_run_L8.png" />
+    <Resource Include="images\player\player_walk\player_run_R1.png" />
+    <Resource Include="images\player\player_walk\player_run_R2.png" />
+    <Resource Include="images\player\player_walk\player_run_R3.png" />
+    <Resource Include="images\player\player_walk\player_run_R4.png" />
+    <Resource Include="images\player\player_walk\player_run_R5.png" />
+    <Resource Include="images\player\player_walk\player_run_R6.png" />
+    <Resource Include="images\player\player_walk\player_run_R7.png" />
+    <Resource Include="images\player\player_walk\player_run_R8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\player\player_attack_v1\player_attack_L1.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L10.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L11.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L2.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L3.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L4.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L5.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L6.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L7.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L8.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_L9.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R1.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R10.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R11.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R2.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R3.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R4.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R5.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R6.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R7.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R8.png" />
+    <Resource Include="images\player\player_attack_v1\player_attack_R9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\player\life_for_player\life_for_player1.png" />
+    <Resource Include="images\player\life_for_player\life_for_player2.png" />
+    <Resource Include="images\player\life_for_player\life_for_player3.png" />
+    <Resource Include="images\player\life_for_player\life_for_player4.png" />
+    <Resource Include="images\player\life_for_player\life_for_player5.png" />
+    <Resource Include="images\player\life_for_player\life_for_player6.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
