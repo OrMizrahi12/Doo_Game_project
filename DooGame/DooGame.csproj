@@ -66,6 +66,7 @@
     <Compile Include="EyeEnemy.cs" />
     <Compile Include="GiftPlayer.cs" />
     <Compile Include="GoblinEnemy.cs" />
+    <Compile Include="MashroomEnemy.cs" />
     <Compile Include="PhysicsDecor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -119,12 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\enemy1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\blockFromUpImg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\blockFromDownImg.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\playerWalk_R_4.png" />
@@ -293,6 +288,52 @@
     <Resource Include="images\player\life_for_player\life_for_player4.png" />
     <Resource Include="images\player\life_for_player\life_for_player5.png" />
     <Resource Include="images\player\life_for_player\life_for_player6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L1.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L2.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L3.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L4.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L5.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L6.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L7.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_L8.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R1.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R2.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R3.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R4.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R5.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R6.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R7.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_attack\mashroom_attack_R8.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L1.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L2.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L3.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L4.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L5.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L6.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L7.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_L8.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R1.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R2.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R3.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R4.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R5.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R6.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R7.png" />
+    <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\florForDoo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\groundA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\blockFromDownImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\blockFromUpImg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

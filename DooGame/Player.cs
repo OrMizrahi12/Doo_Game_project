@@ -60,7 +60,7 @@ namespace DooGame
             playerHitBox = new Rect(Canvas.GetLeft(player), Canvas.GetTop(player), player.Width - 15, player.Height);
         }
 
-        public void PlayerMoveController(Canvas mainCanvas, Player playerCopy)
+        public void PlayerMoveController(double H, double W)
         {
             Canvas.SetTop(player, Canvas.GetTop(player) + playerSpeed);
             if (playrRigth)
@@ -82,7 +82,7 @@ namespace DooGame
                 lastAct = "jump";
                 jumpAbilityPlayer.Value -= 5;
                 prmisionToJump = false;
-                Canvas.SetTop(player, Canvas.GetTop(player) - 30);
+                Canvas.SetTop(player, Canvas.GetTop(player) - H/20);
             }
             if (playerAttack)
             {
@@ -102,6 +102,7 @@ namespace DooGame
                 playerAttackTimerAnimation.Stop();
             }
         }
+        
 
         public void ChangePlayerWalkAnimation(double x)
         {
@@ -153,6 +154,14 @@ namespace DooGame
                 }
             }
             player.Fill = playerImg;
+        }
+
+        public void PlayerProgressLifeEvent(DispatcherTimer GamrTimer)
+        {
+            if(lifePlayer.Value < 1)
+            {
+                GamrTimer.Stop();   
+            }
         }
     }
 }

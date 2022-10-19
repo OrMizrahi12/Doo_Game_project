@@ -39,7 +39,7 @@ namespace DooGame
             Canvas.SetTop(life,0); Canvas.SetLeft(life, 0);
 
             mainCanvas.Children.Add(life);
-
+            BeatingHeartTimer.Stop();
             BeatingHeartTimer.Tick += heartAnimationEngine;
             BeatingHeartTimer.Interval = TimeSpan.FromMilliseconds(50);
             BeatingHeartTimer.Start();

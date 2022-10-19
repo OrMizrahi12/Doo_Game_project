@@ -25,12 +25,13 @@ namespace DooGame
         GoblinEnemy goblinEnemy = new GoblinEnemy();
         EyeEnemy eyeEnemy = new EyeEnemy();
         GiftPlayer giftPlayer = new GiftPlayer();
-
+        MashroomEnemy mashroomEnemy = new MashroomEnemy();
         public MainWindow()
         {
             InitializeComponent();
             InitialGame();
             ResetGame();
+            mainCanvas.Focus();
         }
 
         private void InitialGame()
@@ -42,20 +43,25 @@ namespace DooGame
 
         private void GameEngine(object sender, EventArgs e)
         {
+            Responsive();
+            player.PlayerProgressLifeEvent(GameTimer);
             decor.SetGroundRects();
             player.SetPlayerRects();
             giftPlayer.SetGiftsRect();
             goblinEnemy.SetGoblinRect();
             eyeEnemy.SetEyeEnemyRect();
+            mashroomEnemy.SetMashroomRect();
             decor.GroundPhysics(player, GameTimer,mainCanvas);
-            player.PlayerMoveController(mainCanvas, player);
-            decor.MoveScreen(player, goblinEnemy, eyeEnemy, giftPlayer);
-            decor.MakeBackGroundInfinity();
-            decor.GroundLocator(player);
-            decor.MoveDecor(player, GameTimer);
+            player.PlayerMoveController(this.ActualHeight, this.ActualWidth);
+            decor.MoveScreen(player, goblinEnemy, eyeEnemy, giftPlayer, mashroomEnemy, this.ActualHeight);
+            decor.MakeBackGroundInfinity(this.ActualHeight, this.ActualWidth);
+            decor.GroundLocator(player, this.ActualWidth);
+            decor.MoveDecor(player, GameTimer, this.ActualHeight);
             goblinEnemy.GoblinController(player, decor, GameTimer);
             eyeEnemy.EyeEnemyController(player, decor, GameTimer);
+            mashroomEnemy.MashroomController(player, decor, GameTimer); 
             giftPlayer.PlayerGiftTouchEvent(player, decor);
+        
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -83,7 +89,8 @@ namespace DooGame
             else if (e.Key == Key.Enter)
             {
                 ResetGame();
-            }
+
+            } 
         }
         
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -109,12 +116,46 @@ namespace DooGame
         private void ResetGame()
         {
             mainCanvas.Children.Clear();
-            decor.InitialDecor(mainCanvas);
+            decor.InitialDecor(mainCanvas, this.ActualHeight, this.ActualWidth);
             player.InitialPlayer(mainCanvas);
             goblinEnemy.InitialGoblin(mainCanvas);
             eyeEnemy.InitialEyeEnemy(mainCanvas);
+            mashroomEnemy.InitialMashroom(mainCanvas);
             giftPlayer.InitialGifts(mainCanvas, decor);
             GameTimer.Start();
+        }
+
+        private void Responsive()
+        {
+            double H = this.ActualHeight;
+            double W = this.ActualWidth;
+            
+            decor.background1.Height = H;
+            decor.background2.Height = H;
+            Canvas.SetTop(decor.ground1, H / 3); 
+            Canvas.SetTop(decor.ground2, H / 2); 
+            Canvas.SetTop(decor.ground3, H / 3.5);
+            Canvas.SetTop(decor.flor1, H / 1.3);
+            Canvas.SetTop(decor.flor2, H / 1.3);
+
+            decor.ground1.Width = W / 8;
+            decor.ground2.Width = W / 8;
+            decor.ground3.Width = W / 8;
+            decor.blockDown.Height = H / 2;
+            decor.blockUp.Height = H /2;
+
+            player.player.Width = W / 14;
+            player.player.Height = H / 8;
+
+            eyeEnemy.eyeEnemy.Width = W / 16;
+            eyeEnemy.eyeEnemy.Height = H / 8;
+
+            mashroomEnemy.mashroom.Width = W / 16;
+            mashroomEnemy.mashroom.Height = H / 14;
+
+            goblinEnemy.goblin.Width = W / 16;
+            goblinEnemy.goblin.Height = H / 14;
+
         }
     }
 }

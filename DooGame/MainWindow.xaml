@@ -6,8 +6,6 @@
         xmlns:local="clr-namespace:DooGame"
         mc:Ignorable="d"
         Title="Doo Game" Height="450" Width="800">
-    <Canvas Name="mainCanvas" Focusable="True" Background="LightBlue" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
-        <!--<Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="background1" Height="400" Width="1262" Fill="Orange" />
-        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="background2" Height="400" Width="1262" Fill="LightGreen" Canvas.Left="1262" />-->
+    <Canvas Width="Auto" Height="Auto" Name="mainCanvas" Focusable="True"  Background="LightBlue" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
     </Canvas>
 </Window>

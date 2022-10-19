@@ -34,7 +34,7 @@ namespace DooGame
             goblinImg.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/goblin(enemy)/goblin_walk_R1.png"));
             goblinLife.Value = 100; goblinLife.Width = 50; goblinLife.Height = 10; goblinLife.Foreground = new SolidColorBrush(Colors.Purple);
             
-            Canvas.SetLeft(goblin, 2000); Canvas.SetTop(goblin, 630);
+            Canvas.SetLeft(goblin, 2000); Canvas.SetTop(goblin, 0);
             Canvas.SetTop(goblinLife, Canvas.GetTop(goblin) - goblin.Height); Canvas.SetLeft(goblinLife, Canvas.GetLeft(goblin) - (goblin.Width / 2));
           
             mainCanvas.Children.Add(goblin);
@@ -42,19 +42,21 @@ namespace DooGame
         }
         public void SetGoblinRect()
         {
-            goblinRect = new Rect(Canvas.GetLeft(goblin), Canvas.GetTop(goblin), goblin.Width - 15, goblin.Height);
+            goblinRect = new Rect(Canvas.GetLeft(goblin), Canvas.GetTop(goblin), goblin.Width, goblin.Height);
         }
 
         public void GoblinController(Player player, PhysicsDecor decor, DispatcherTimer GameTimer)
         {
-            Canvas.SetTop(goblinLife, Canvas.GetTop(goblin) - 10); Canvas.SetLeft(goblinLife, Canvas.GetLeft(goblin) - (goblin.Width / 2)); 
+            Canvas.SetTop(goblinLife, Canvas.GetTop(goblin) - 10); Canvas.SetLeft(goblinLife, Canvas.GetLeft(goblin) - (goblin.Width / 2));
 
-           if ((!goblinRect.IntersectsWith(decor.flor1Rect) || !goblinRect.IntersectsWith(decor.flor2Rect)) && Canvas.GetTop(goblin) < 630)
-           {
-                Canvas.SetTop(goblin, Canvas.GetTop(goblin) + goblinSpeed);
-           }
+            Canvas.SetTop(goblin, Canvas.GetTop(goblin) + goblinSpeed);
+            if (goblinRect.IntersectsWith(decor.flor1Rect) || goblinRect.IntersectsWith(decor.flor2Rect))
+            {
+                Canvas.SetTop(goblin, Canvas.GetTop(goblin) - goblinSpeed);
 
-           if(Canvas.GetLeft(goblin) < Canvas.GetLeft(player.player) && !goblinCanAttak)
+            }
+
+            if (Canvas.GetLeft(goblin) < Canvas.GetLeft(player.player) && !goblinCanAttak)
            {
                 Canvas.SetLeft(goblin, Canvas.GetLeft(goblin) + goblinSpeed);
                 goblinAct = "Rigth";
