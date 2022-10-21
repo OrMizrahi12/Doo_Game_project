@@ -19,12 +19,15 @@ namespace DooGame
 {
     internal class PhysicsDecor
     {
+        private Random random = new Random();
+        private ImageBrush background, ground, blobkUpImg, blockDownImg, florImg;
+        private bool blocksCanBeShut = true;
+        private int movingGroundSpeed = 2, groundMovingCounter = 0;
+        private double movingBlockSpeed = 0, blockUpLimit = 0, blockUpLocation = 0, blockDownLocation = 0, middleOfScreen = 0;
+
         public Rectangle ground1, ground2, ground3 ,background1, background2, blockUp, blockDown, flor1,flor2;
         public Rect groundRect1, groundRect2, groundRect3, blockUpRect, blobkDownRect, flor1Rect, flor2Rect;
-        Random random = new Random();
-        bool blocksCanBeShut = true;
-        int movingGroundSpeed = 2, groundMovingCounter = 0;
-        public ImageBrush background ,ground, blobkUpImg, blockDownImg, florImg;
+       
         public PhysicsDecor()
         {
             flor1 = new Rectangle(); flor2 = new Rectangle();
@@ -35,13 +38,13 @@ namespace DooGame
             blockDownImg = new ImageBrush(); florImg = new ImageBrush();
         }
 
-        public void InitialDecor(Canvas mainCanvas , double W, double H, KeyAndDoor keyAndDoor)
+        public void InitialDecor(Canvas mainCanvas , double W, double H, PhaseToolsLevel phaseTools)
         {
-            ReplaceBackground(keyAndDoor.level);
-            Replacegrounds(keyAndDoor.level);
-            ReplaceFlors(keyAndDoor.level);
-            ReplaceTrapsUp(keyAndDoor.level);
-            ReplaceTrapsDown(keyAndDoor.level);
+            ReplaceBackground(phaseTools.level);
+            Replacegrounds(phaseTools.level);
+            ReplaceFlors(phaseTools.level);
+            ReplaceTrapsUp(phaseTools.level);
+            ReplaceTrapsDown(phaseTools.level);
 
             movingGroundSpeed = 2; groundMovingCounter = 0;
             background1.Width = 1600; background2.Width = 1600;
@@ -133,9 +136,9 @@ namespace DooGame
             }
         }
 
-        public void MoveScreen(Player player, GoblinEnemy goblinEnemy, EyeEnemy eyeEnemy, GiftPlayer giftPlayer, MashroomEnemy mashroomEnemy,KeyAndDoor keyAndDoor, double W)
+        public void MoveScreen(Player player, GoblinEnemy goblinEnemy, EyeEnemy eyeEnemy, GiftPlayer giftPlayer, MashroomEnemy mashroomEnemy,PhaseToolsLevel phaseTools, double W)
         {
-            if (Canvas.GetLeft(player.player) > (W / 2) && player.playrRigth == true)
+            if (Canvas.GetLeft(player.player) > middleOfScreen && player.playrRigth == true)
             {
                 Canvas.SetLeft(background1, Canvas.GetLeft(background1) - player.playerSpeed);
                 Canvas.SetLeft(background2, Canvas.GetLeft(background2) - player.playerSpeed);
@@ -151,11 +154,11 @@ namespace DooGame
                 Canvas.SetLeft(eyeEnemy.eyeEnemy, Canvas.GetLeft(eyeEnemy.eyeEnemy) - player.playerSpeed);
                 Canvas.SetLeft(mashroomEnemy.mashroom, Canvas.GetLeft(mashroomEnemy.mashroom) - player.playerSpeed);
                 Canvas.SetLeft(giftPlayer.life, Canvas.GetLeft(giftPlayer.life) - player.playerSpeed);
-                Canvas.SetLeft(keyAndDoor.key, Canvas.GetLeft(keyAndDoor.key) - player.playerSpeed);
-                Canvas.SetLeft(keyAndDoor.door, Canvas.GetLeft(keyAndDoor.door) - player.playerSpeed);
+                Canvas.SetLeft(phaseTools.key, Canvas.GetLeft(phaseTools.key) - player.playerSpeed);
+                Canvas.SetLeft(phaseTools.door, Canvas.GetLeft(phaseTools.door) - player.playerSpeed);
 
             }
-            else if(Canvas.GetLeft(player.player) < (W / 2) && player.playerLeft == true)
+            else if(Canvas.GetLeft(player.player) < middleOfScreen && player.playerLeft == true)
             {
                 Canvas.SetLeft(background1, Canvas.GetLeft(background1) + player.playerSpeed);
                 Canvas.SetLeft(background2, Canvas.GetLeft(background2) + player.playerSpeed);
@@ -171,8 +174,8 @@ namespace DooGame
                 Canvas.SetLeft(eyeEnemy.eyeEnemy, Canvas.GetLeft(eyeEnemy.eyeEnemy) + player.playerSpeed);
                 Canvas.SetLeft(mashroomEnemy.mashroom, Canvas.GetLeft(mashroomEnemy.mashroom) + player.playerSpeed);
                 Canvas.SetLeft(giftPlayer.life, Canvas.GetLeft(giftPlayer.life) + player.playerSpeed);
-                Canvas.SetLeft(keyAndDoor.key, Canvas.GetLeft(keyAndDoor.key) + player.playerSpeed);
-                Canvas.SetLeft(keyAndDoor.door, Canvas.GetLeft(keyAndDoor.door) + player.playerSpeed);
+                Canvas.SetLeft(phaseTools.key, Canvas.GetLeft(phaseTools.key) + player.playerSpeed);
+                Canvas.SetLeft(phaseTools.door, Canvas.GetLeft(phaseTools.door) + player.playerSpeed);
             }
         }
 
@@ -195,9 +198,9 @@ namespace DooGame
             }
         }
 
-        public void MoveDecor(Player player, DispatcherTimer GameTimer, double H)
+        public void MoveDecor(Player player)
         {
-            BlockMoving( player, GameTimer, H);
+            BlockMoving(player);
             GroundMoving(player);
         }
 
@@ -223,11 +226,11 @@ namespace DooGame
             groundMovingCounter++;
         }
 
-        private void BlockMoving(Player player, DispatcherTimer GameTimer, double H)
+        private void BlockMoving(Player player)
         {
             if (blockUpRect.IntersectsWith(blobkDownRect) == false && blocksCanBeShut == true)
             {
-                Canvas.SetTop(blockUp, Canvas.GetTop(blockUp) + 10); Canvas.SetTop(blockDown, Canvas.GetTop(blockDown) - 10);
+                Canvas.SetTop(blockUp, Canvas.GetTop(blockUp) + movingBlockSpeed); Canvas.SetTop(blockDown, Canvas.GetTop(blockDown) - movingBlockSpeed);
             }
             else if (blockUpRect.IntersectsWith(blobkDownRect))
             {
@@ -235,9 +238,9 @@ namespace DooGame
             }
             if (blocksCanBeShut == false)
             {
-                Canvas.SetTop(blockUp, Canvas.GetTop(blockUp) - 10); Canvas.SetTop(blockDown, Canvas.GetTop(blockDown) + 10);
+                Canvas.SetTop(blockUp, Canvas.GetTop(blockUp) - movingBlockSpeed); Canvas.SetTop(blockDown, Canvas.GetTop(blockDown) + movingBlockSpeed);
 
-                if (Canvas.GetTop(blockUp) < -(H / 2.5))
+                if (Canvas.GetTop(blockUp) < blockUpLimit)
                 {
                     blocksCanBeShut = true;
                 }
@@ -247,8 +250,8 @@ namespace DooGame
                 blockDown.Visibility = Visibility.Visible;
                 blockUp.Visibility = Visibility.Visible;
                 int randomBlocksLocation = random.Next(1000, 1400);
-                Canvas.SetLeft(blockUp, randomBlocksLocation); Canvas.SetTop(blockUp, -(H/2));
-                Canvas.SetLeft(blockDown, randomBlocksLocation); Canvas.SetTop(blockDown, H);
+                Canvas.SetLeft(blockUp, randomBlocksLocation); Canvas.SetTop(blockUp, blockUpLocation);
+                Canvas.SetLeft(blockDown, randomBlocksLocation); Canvas.SetTop(blockDown, blockDownLocation);
             }
 
             if (player.playerHitBox.IntersectsWith(blockUpRect) || player.playerHitBox.IntersectsWith(blobkDownRect))
@@ -335,6 +338,20 @@ namespace DooGame
                 }
             }
             blockDown.Fill = blockDownImg;
+        }
+
+        public void ResponsiveDecor(double W, double H)
+        {
+            Canvas.SetTop(ground1, H / 3); Canvas.SetTop(ground2, H / 2); Canvas.SetTop(ground3, H / 3.5);
+            Canvas.SetTop(flor1, H - flor1.Height); Canvas.SetTop(flor2, H - flor1.Height);
+            background1.Height = H; background2.Height = H;
+            ground1.Width = W / 8; ground2.Width = W / 8; ground3.Width = W / 8;
+            blockDown.Height = H / 2; blockUp.Height = H / 2;
+            movingBlockSpeed = H / 80;
+            blockUpLimit = -H / 2.5;
+            blockUpLocation = -H / 2;
+            blockDownLocation = H;
+            middleOfScreen = W / 2;
         }
     }
 }

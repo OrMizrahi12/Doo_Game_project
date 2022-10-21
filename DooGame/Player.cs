@@ -16,16 +16,18 @@ namespace DooGame
 {
     internal class Player
     {
-        public Rectangle player;
-        public Rect playerHitBox;
-        public DispatcherTimer playerAttackTimerAnimation = new DispatcherTimer();
-        public double counterForChangeAnimation = 0, playerSpeed = 10, playerForceJump = 0;
-        public ProgressBar jumpAbilityPlayer = new ProgressBar(); public ProgressBar lifePlayer = new ProgressBar();
+        private DispatcherTimer playerAttackTimerAnimation = new DispatcherTimer();
+        private ImageBrush playerImg;
+        private double playerAttackAnimationCounter = 1, counterForChangeAnimation = 0;
         private string diraction, lastAct;
+
+        public Rectangle player;
+        public ProgressBar jumpAbilityPlayer = new ProgressBar(); public ProgressBar lifePlayer = new ProgressBar();
+        public Rect playerHitBox;
+        public double playerSpeed = 10, playerForceJump = 0;
         public int goblinKillCound = 2, mashroomKillCount = 4, eyeKillCount = 3, actualGoblinKillCound = 0, actualMashroomKillCount = 0, actualEyeKillCount = 0;
-        double playerAttackAnimationCounter = 1;
         public bool playrRigth, playerLeft, playerJump, playerShooter ,prmisionToJump = true, playerAttack, playerTakeKey;
-        public ImageBrush playerImg;
+        
         public Player()
         {
             player = new Rectangle();
@@ -38,26 +40,24 @@ namespace DooGame
         public void InitialPlayer(Canvas mainCanvas)
         {
             playerAttackTimerAnimation.Stop();
+
             actualGoblinKillCound = 0; actualMashroomKillCount = 0; actualEyeKillCount = 0;
-
             player.Width = 80; player.Height = 130; player.Fill = playerImg;
-            Canvas.SetTop(player, 0); Canvas.SetLeft(player, 0);        
-            mainCanvas.Children.Add(player);
-
             jumpAbilityPlayer.Value = 100; jumpAbilityPlayer.Width = 150; jumpAbilityPlayer.Height = 20; jumpAbilityPlayer.Foreground = new SolidColorBrush(Colors.Orange);
-            Canvas.SetTop(jumpAbilityPlayer, 5); Canvas.SetLeft(jumpAbilityPlayer, 5);
-            mainCanvas.Children.Add(jumpAbilityPlayer);
-
             lifePlayer.Value = 100; lifePlayer.Width = 50; lifePlayer.Height = 10; lifePlayer.Foreground = new SolidColorBrush(Colors.Green);
 
-            Canvas.SetTop(lifePlayer, Canvas.GetTop(player) - player.Height); Canvas.SetLeft(lifePlayer, Canvas.GetLeft(player) - (player.Width / 2));
+            Canvas.SetTop(player, 0); Canvas.SetLeft(player, 0);        
+            Canvas.SetTop(jumpAbilityPlayer, 5); Canvas.SetLeft(jumpAbilityPlayer, 5);
+            Canvas.SetTop(lifePlayer, Canvas.GetTop(player) - player.Height);
+            Canvas.SetLeft(lifePlayer, Canvas.GetLeft(player) - (player.Width / 2));
+            
             mainCanvas.Children.Add(lifePlayer);
+            mainCanvas.Children.Add(player);
+            mainCanvas.Children.Add(jumpAbilityPlayer);
         }
-
 
         public void SetPlayerRects()
         {
-            Canvas.SetTop(lifePlayer, Canvas.GetTop(player) - 15); Canvas.SetLeft(lifePlayer, Canvas.GetLeft(player) );
             playerHitBox = new Rect(Canvas.GetLeft(player), Canvas.GetTop(player), player.Width - 15, player.Height);
         }
 
@@ -94,7 +94,6 @@ namespace DooGame
 
         private void playerAnimationAttackEngine(object sender, EventArgs e)
         {
-
             ChangePlayerAttackAnimation(playerAttackAnimationCounter);
             playerAttackAnimationCounter += 1;
             if (playerAttackAnimationCounter == 11)
@@ -158,11 +157,39 @@ namespace DooGame
         }
 
         public void PlayerProgressLifeEvent(DispatcherTimer GamrTimer)
-        {
-            if(lifePlayer.Value < 1)
+        {            
+            if(lifePlayer.Value > 60)
             {
-                GamrTimer.Stop();   
+                lifePlayer.Foreground = new SolidColorBrush(Colors.Green);
             }
+            else if(lifePlayer.Value < 60 && lifePlayer.Value > 30)
+            {
+                lifePlayer.Foreground = new SolidColorBrush(Colors.Orange);
+            }
+            else if (lifePlayer.Value < 30 )
+            {
+                lifePlayer.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            if (lifePlayer.Value < 1)
+            {
+                GamrTimer.Stop();
+            }
+        }
+
+        public void ResponsivePlayer(double H, double W)
+        {
+            Canvas.SetTop(lifePlayer, Canvas.GetTop(player) - 15);
+            Canvas.SetLeft(lifePlayer, Canvas.GetLeft(player));
+
+            player.Width = W / 14;
+            player.Height = H / 8;
+            playerSpeed = H / 40;
+            playerForceJump = H / 15;
+        }
+
+        public void LocatePlayerAfterLoading()
+        {
+            Canvas.SetTop(player, 0);
         }
     }
 }

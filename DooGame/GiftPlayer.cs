@@ -14,16 +14,17 @@ namespace DooGame
 {
     internal class GiftPlayer
     {
+        private Rectangle[] arrOfGrounds = new Rectangle[3];
+        private Random random = new Random();
+        private int randomGround;
+        private ImageBrush lifeImg;
+        private DispatcherTimer BeatingHeartTimer;
+        private bool increaseHeart;
+        private double counterForHeartBeats = 1;
+
         public Rectangle life;
         public Rect lifeRect;
-        public ImageBrush lifeImg; 
-        public DispatcherTimer BeatingHeartTimer;
-        bool increase;
-        double counterForHeartBeats = 1;
-        Rectangle[] arrOfGrounds = new Rectangle[3];
-        Random random = new Random();
-        int randomGround;
-
+   
         public GiftPlayer()
         {
             life = new Rectangle();
@@ -36,9 +37,10 @@ namespace DooGame
             life.Width = 40; life.Height = 40;
             lifeImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/player/life_for_player/life_for_player1.png"));
             life.Fill = lifeImg; life.Visibility = Visibility.Collapsed;
+           
             Canvas.SetTop(life,0); Canvas.SetLeft(life, 0);
-
             mainCanvas.Children.Add(life);
+            
             BeatingHeartTimer.Stop();
             BeatingHeartTimer.Tick += heartAnimationEngine;
             BeatingHeartTimer.Interval = TimeSpan.FromMilliseconds(50);
@@ -51,17 +53,17 @@ namespace DooGame
             
             if (counterForHeartBeats == 6)
             {
-                increase = false;
+                increaseHeart = false;
             }
             else if (counterForHeartBeats == 0)
             {
-                increase = true;
+                increaseHeart = true;
             }
-            if (increase)
+            if (increaseHeart)
             {
                 counterForHeartBeats+=1;
             }
-            else if (!increase)
+            else if (!increaseHeart)
             {
                 counterForHeartBeats-=1;
             }

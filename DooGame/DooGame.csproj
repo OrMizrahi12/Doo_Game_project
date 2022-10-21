@@ -96,7 +96,7 @@
     <Compile Include="EyeEnemy.cs" />
     <Compile Include="GiftPlayer.cs" />
     <Compile Include="GoblinEnemy.cs" />
-    <Compile Include="KeyAndDoor.cs" />
+    <Compile Include="PhaseToolsLevel .cs" />
     <Compile Include="MashroomEnemy.cs" />
     <Compile Include="PhysicsDecor.cs" />
     <Compile Include="MainWindow.xaml.cs">

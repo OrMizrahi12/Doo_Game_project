@@ -14,14 +14,14 @@ namespace DooGame
 {
     internal class EyeEnemy 
     {
+        private ImageBrush eyeEnemyImg, eyeEnemyLabalImg;
+        private bool eyeEnemyCanAttak;
+        private TextBlock textBlockEyeKill = new TextBlock();
 
         public Rectangle eyeEnemy, eyeEnemyLabal;
         public Rect eyeEnemyRect;
-        public ImageBrush eyeEnemyImg, eyeEnemyLabalImg;
         public ProgressBar eyeEnemyLife = new ProgressBar();
         public string eyeEnemyAct;
-        bool eyeEnemyCanAttak;
-        public TextBlock textBlockEyeKill = new TextBlock();
         public double eyeEnemyCounterForChangeImgWalk = 0, eyeEnemyCounterForChangeImgAttack = 0, eyeEnemySpeed = 3;
        
         public EyeEnemy()
@@ -35,7 +35,6 @@ namespace DooGame
         public void InitialEyeEnemy(Canvas mainCanvas, Player player)
         {
             textBlockEyeKill.Text = $"0/{player.eyeKillCount}";
-
             eyeEnemyImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/eye(enemy)/eye_flight_R1.png"));
             eyeEnemyLabalImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/eye(enemy)/eye_flight_R1.png"));
 
@@ -57,9 +56,7 @@ namespace DooGame
         }
 
         public void EyeEnemyController(Player player, PhysicsDecor decor, DispatcherTimer GameTimer)
-        {
-            Canvas.SetTop(eyeEnemyLife, Canvas.GetTop(eyeEnemy) - 10); Canvas.SetLeft(eyeEnemyLife, Canvas.GetLeft(eyeEnemy) - (eyeEnemy.Width / 2));
-            
+        {            
             if (Canvas.GetLeft(eyeEnemy) < Canvas.GetLeft(player.player) && !eyeEnemyCanAttak)
             {
                 Canvas.SetLeft(eyeEnemy, Canvas.GetLeft(eyeEnemy) + eyeEnemySpeed);
@@ -182,6 +179,21 @@ namespace DooGame
                 }
             }
             eyeEnemy.Fill = eyeEnemyImg;
+        }
+
+        public void ResponsiveEyeEnemy(Player player, double H, double W)
+        {
+            Canvas.SetLeft(eyeEnemyLabal, 5);
+            Canvas.SetTop(eyeEnemyLabal, player.lifePlayer.Height * 3);
+            Canvas.SetTop(textBlockEyeKill, eyeEnemyLabal.Height * 2);
+            Canvas.SetLeft(textBlockEyeKill, 5);
+            Canvas.SetTop(eyeEnemyLife, Canvas.GetTop(eyeEnemy) - 10); 
+            Canvas.SetLeft(eyeEnemyLife, Canvas.GetLeft(eyeEnemy) - (eyeEnemy.Width / 2));
+
+            textBlockEyeKill.FontSize = W / 50;
+            eyeEnemy.Width = W / 16; eyeEnemy.Height = H / 8;
+            eyeEnemyLabal.Width = W / 22; eyeEnemyLabal.Height = H / 18;
+            eyeEnemySpeed = H / 80;
         }
     }
 }

@@ -13,18 +13,19 @@ using System.Windows.Threading;
 
 namespace DooGame
 {
-    internal class KeyAndDoor
+    internal class PhaseToolsLevel
     {
-        public TextBlock winMsg;
+        private Random random = new Random();
+        private TextBlock winMsg;
+        private ImageBrush doorImg, KeyImg, playerWinImg;
+        private int keyDistance = 4500, doorDistance = 6500;
+
         public bool winTheGame;
-        int keyDistance = 4500, doorDistance = 6500;
         public Rectangle door, key, playerWin;
         public Rect doorRect, keyRect;
-        public ImageBrush doorImg, KeyImg, playerWinImg;
         public int level = 1;
-        Random random = new Random();   
-
-        public KeyAndDoor()
+           
+        public PhaseToolsLevel()
         {
             winMsg = new TextBlock();
             door = new Rectangle();
@@ -35,7 +36,7 @@ namespace DooGame
             playerWinImg = new ImageBrush();    
         }
 
-        public void InitialDoorAndKey(Canvas mainCanvas, PhysicsDecor decor)
+        public void InitialPhaseTools(Canvas mainCanvas, PhysicsDecor decor)
         {
             doorImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/for_finish_level/door_locked_.png"));
             KeyImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/for_finish_level/key.png"));
@@ -58,10 +59,9 @@ namespace DooGame
             mainCanvas.Children.Add(key);
             mainCanvas.Children.Add(winMsg);
             mainCanvas.Children.Add(playerWin);
-
         }
 
-        public void SetDoorAndKeyRect()
+        public void SetPhaseToolsRect()
         {
             doorRect = new Rect(Canvas.GetLeft(door), Canvas.GetTop(door), door.Width, door.Height);
             keyRect = new Rect(Canvas.GetLeft(key), Canvas.GetTop(key), key.Width, key.Height);
@@ -113,6 +113,29 @@ namespace DooGame
              
         }
 
+        public void ResponsivePhaseTools(PhysicsDecor decor, double H, double W)
+        {
+            Canvas.SetTop(door, Canvas.GetTop(decor.flor1) - door.Height);
+            Canvas.SetTop(winMsg, H / 2 + playerWin.Height);
+            Canvas.SetLeft(winMsg, W / 2 - winMsg.Width / 2);
+            Canvas.SetTop(key, Canvas.GetTop(decor.flor1) - key.Height);
+            Canvas.SetLeft(playerWin, (W / 2) - playerWin.Width);
+            Canvas.SetTop(playerWin, (H / 2) - playerWin.Height);
 
+            if (doorRect.IntersectsWith(decor.blobkDownRect))
+            {
+                Canvas.SetLeft(door, Canvas.GetLeft(door) + W / 5);
+            }
+
+            playerWin.Width = W / 5; playerWin.Height = H / 5;
+            winMsg.FontSize = W / 30;
+            door.Width = W / 10; door.Height = H / 4;
+            key.Width = W / 16; key.Height = H / 14;
+        }
+
+        public void LocatePhaseToolsAfterLoading(PhysicsDecor decor)
+        {
+            Canvas.SetTop(key, Canvas.GetTop(decor.ground3));
+        }
     }
 }

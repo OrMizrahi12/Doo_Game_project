@@ -14,16 +14,16 @@ namespace DooGame
 {
     internal class GoblinEnemy
     {
+        private double goblinCounterForChangeImgWalk = 0, goblinCounterForChangeImgAttack = 0, goblinSpeed = 5;
+        private TextBlock textBlockGoblinKill = new TextBlock();
+        private ImageBrush goblinImg, goblinLabalImg;
+        private bool goblinCanAttak;
+        private string goblinAct;
+
         public Rectangle goblin, goblinLabal;
         public Rect goblinRect;
-        public TextBlock textBlockGoblinKill = new TextBlock();
-
-        public ImageBrush goblinImg, goblinLabalImg;
         public ProgressBar goblinLife = new ProgressBar();
-        public string goblinAct;
-        bool goblinCanAttak;
-        public double goblinCounterForChangeImgWalk = 0, goblinCounterForChangeImgAttack = 0;
-        int goblinSpeed = 5; 
+
         public GoblinEnemy()
         {
             goblin = new Rectangle();
@@ -35,24 +35,23 @@ namespace DooGame
         public void InitialGoblin(Canvas mainCanvas, Player player)
         {
             textBlockGoblinKill.Text = $"0/{player.goblinKillCound}";
-
             goblin.Width = 50; goblin.Height = 100; goblin.Fill = goblinImg;
             goblinLabal.Width = 40; goblinLabal.Height = 60;
+            goblinLife.Value = 100; goblinLife.Width = 50; goblinLife.Height = 10; goblinLife.Foreground = new SolidColorBrush(Colors.Purple);
             goblinLabal.Fill = goblinLabalImg;
+
             goblinImg.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/goblin(enemy)/goblin_walk_R1.png"));
             goblinLabalImg.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/goblin(enemy)/goblin_walk_R3.png"));
-            goblinLife.Value = 100; goblinLife.Width = 50; goblinLife.Height = 10; goblinLife.Foreground = new SolidColorBrush(Colors.Purple);
             
             Canvas.SetLeft(goblin, 2000); Canvas.SetTop(goblin, 0);
-
             Canvas.SetTop(goblinLife, Canvas.GetTop(goblin) - goblin.Height); Canvas.SetLeft(goblinLife, Canvas.GetLeft(goblin) - (goblin.Width / 2));
           
             mainCanvas.Children.Add(goblin);
             mainCanvas.Children.Add(goblinLabal);
             mainCanvas.Children.Add(goblinLife);
             mainCanvas.Children.Add(textBlockGoblinKill);
-
         }
+
         public void SetGoblinRect()
         {
             goblinRect = new Rect(Canvas.GetLeft(goblin), Canvas.GetTop(goblin), goblin.Width, goblin.Height);
@@ -60,8 +59,6 @@ namespace DooGame
 
         public void GoblinController(Player player, PhysicsDecor decor, DispatcherTimer GameTimer)
         {
-            Canvas.SetTop(goblinLife, Canvas.GetTop(goblin) - 10); Canvas.SetLeft(goblinLife, Canvas.GetLeft(goblin) - (goblin.Width / 2));
-
             Canvas.SetTop(goblin, Canvas.GetTop(goblin) + goblinSpeed);
             if (goblinRect.IntersectsWith(decor.flor1Rect) || goblinRect.IntersectsWith(decor.flor2Rect))
             {
@@ -181,6 +178,22 @@ namespace DooGame
                 }
             }
             goblin.Fill = goblinImg;
+        }
+
+        public void ResponsiveGoblin(PhysicsDecor decor, EyeEnemy eyeEnemy, Player player, MashroomEnemy mashroomEnemy, double H, double W)
+        {
+            Canvas.SetTop(goblinLife, Canvas.GetTop(goblin) - 10); 
+            Canvas.SetLeft(goblinLife, Canvas.GetLeft(goblin) - (goblin.Width / 2));
+            Canvas.SetTop(goblin, Canvas.GetTop(decor.flor1) - goblin.Height);
+            Canvas.SetLeft(goblinLabal, eyeEnemy.eyeEnemyLabal.Width + (goblinLabal.Width * 1));
+            Canvas.SetTop(goblinLabal, player.lifePlayer.Height * 3);
+            Canvas.SetTop(textBlockGoblinKill, goblinLabal.Height * 2);
+            Canvas.SetLeft(textBlockGoblinKill, eyeEnemy.eyeEnemyLabal.Width + goblinLabal.Width + mashroomEnemy.mashroomLabal.Width / 2);
+          
+            textBlockGoblinKill.FontSize = W / 50;
+            goblin.Width = W / 16; goblin.Height = H / 14;
+            goblinLabal.Width = W / 22; goblinLabal.Height = H / 18;
+            goblinSpeed = H / 70;        
         }
     }
 }
