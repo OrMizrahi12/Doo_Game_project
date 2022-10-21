@@ -96,6 +96,7 @@
     <Compile Include="EyeEnemy.cs" />
     <Compile Include="GiftPlayer.cs" />
     <Compile Include="GoblinEnemy.cs" />
+    <Compile Include="MenuInterface.cs" />
     <Compile Include="PhaseToolsLevel .cs" />
     <Compile Include="MashroomEnemy.cs" />
     <Compile Include="PhysicsDecor.cs" />
@@ -364,6 +365,25 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\menuInterface\btnContinu.png" />
+    <Resource Include="images\menuInterface\btnContinuPressed.png" />
+    <Resource Include="images\menuInterface\btnMenu.png" />
+    <Resource Include="images\menuInterface\btnMenuPressed.png" />
+    <Resource Include="images\menuInterface\btnNewGame.png" />
+    <Resource Include="images\menuInterface\btnNewGamePressed.png" />
+    <Resource Include="images\menuInterface\btnReset.png" />
+    <Resource Include="images\menuInterface\btnResetPressed.png" />
+    <Resource Include="images\menuInterface\btnStart.png" />
+    <Resource Include="images\menuInterface\btnStartPressed.png" />
+    <Resource Include="images\menuInterface\Free Platformer_UI_Buttons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\menuInterface\btnBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\menuInterface\btnBackPressed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

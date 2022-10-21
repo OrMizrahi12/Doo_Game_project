@@ -156,7 +156,7 @@ namespace DooGame
             player.Fill = playerImg;
         }
 
-        public void PlayerProgressLifeEvent(DispatcherTimer GamrTimer)
+        public void PlayerProgressLifeEvent(DispatcherTimer GamrTimer, MenuInterface menuInterface)
         {            
             if(lifePlayer.Value > 60)
             {
@@ -172,6 +172,7 @@ namespace DooGame
             }
             if (lifePlayer.Value < 1)
             {
+                menuInterface.ShowGameOverCanvas();
                 GamrTimer.Stop();
             }
         }

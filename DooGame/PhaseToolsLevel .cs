@@ -77,19 +77,13 @@ namespace DooGame
         }
 
 
-        public void PlayerOpenDoor(Player player, DispatcherTimer GameTimer, Canvas mainCanvas ,double W, double H)
+        public void PlayerOpenDoor(Player player, DispatcherTimer GameTimer, Canvas mainCanvas ,double W, double H, MenuInterface menuInterface)
         {
             if (player.playerHitBox.IntersectsWith(doorRect) && player.playerTakeKey)
             {
                 if(player.actualEyeKillCount >= player.eyeKillCount && player.actualGoblinKillCound >= player.goblinKillCound && player.actualMashroomKillCount >= player.mashroomKillCount)
                 {
                     GameTimer.Stop();
-                    mainCanvas.Children.Clear();
-                    mainCanvas.Background = new SolidColorBrush(Colors.Black);
-
-                    winMsg.Visibility = Visibility.Visible;
-                    playerWin.Visibility = Visibility.Visible;
-                    playerWin.Visibility = Visibility.Visible;
                     key.Visibility = Visibility.Visible;
 
                     player.playerTakeKey = false;
@@ -100,13 +94,12 @@ namespace DooGame
                     player.eyeKillCount += random.Next(3, 5);
 
                     keyDistance += 2000; doorDistance += 2000;
-                    winMsg.Text = $"WIN! to level {level} press ENTER -->";
 
-                    mainCanvas.Children.Add(winMsg);
-                    mainCanvas.Children.Add(playerWin);
 
                     doorImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/for_finish_level/door_unloked.png"));
                     door.Fill = doorImg;
+
+                    menuInterface.ShowWinCanvas();
                 }
                 
             }

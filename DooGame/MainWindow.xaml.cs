@@ -27,18 +27,19 @@ namespace DooGame
         private GiftPlayer giftPlayer = new GiftPlayer();
         private MashroomEnemy mashroomEnemy = new MashroomEnemy();
         private PhaseToolsLevel phaseTools = new PhaseToolsLevel();
+        private MenuInterface menuInterface = new MenuInterface();
         private double H, W;
 
         public MainWindow()
         {
             InitializeComponent();
             InitialGame();
-            ResetGame();
             mainCanvas.Focus();
         }
 
-        private void InitialGame()
-        { 
+        public void InitialGame()
+        {
+            ResetGame();
             mainCanvas.Focus();
             GameTimer.Tick += GameEngine;
             GameTimer.Interval = TimeSpan.FromMilliseconds(20);
@@ -53,9 +54,8 @@ namespace DooGame
         private void GameEngine(object sender, EventArgs e)
         {
             H = this.ActualHeight; W = this.ActualWidth;
-          
             ResponsiveManager();
-            player.PlayerProgressLifeEvent(GameTimer);
+            player.PlayerProgressLifeEvent(GameTimer, menuInterface);
             decor.SetGroundRects();
             player.SetPlayerRects();
             giftPlayer.SetGiftsRect();
@@ -65,16 +65,22 @@ namespace DooGame
             phaseTools.SetPhaseToolsRect();
             decor.GroundPhysics(player, H);
             player.PlayerMoveController(H, W);
-            decor.MoveScreen(player, goblinEnemy, eyeEnemy, giftPlayer, mashroomEnemy,phaseTools, H);
+            decor.MoveScreen(player, goblinEnemy, eyeEnemy, giftPlayer, mashroomEnemy, phaseTools, H);
             decor.MakeBackGroundInfinity(H, W);
             decor.GroundLocator(player, W);
             decor.MoveDecor(player);
-            goblinEnemy.GoblinController(player, decor, GameTimer);
-            eyeEnemy.EyeEnemyController(player, decor, GameTimer);
-            mashroomEnemy.MashroomController(player, decor, GameTimer); 
             giftPlayer.PlayerGiftTouchEvent(player, decor);
             phaseTools.PlayerTakeKey(player);
-            phaseTools.PlayerOpenDoor(player,GameTimer, mainCanvas, W, H);
+            phaseTools.PlayerOpenDoor(player, GameTimer, mainCanvas, W, H, menuInterface);
+
+            if (menuInterface.starterCanvas.Visibility == Visibility.Collapsed)
+            {
+                goblinEnemy.GoblinController(player, decor, GameTimer);
+                eyeEnemy.EyeEnemyController(player, decor, GameTimer);
+                mashroomEnemy.MashroomController(player, decor, GameTimer);
+            }
+               
+
         }
         
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -99,18 +105,7 @@ namespace DooGame
             {
                 player.playerAttack = true;
             }
-            else if (e.Key == Key.Enter)
-            {
-                ResetGame();
-            } 
-            else if (e.Key == Key.P)
-            {
-                GameTimer.Stop();
-            }
-            else if (e.Key == Key.O)
-            {
-                GameTimer.Start();
-            }
+  
         }
         
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -134,27 +129,29 @@ namespace DooGame
         }
 
         private void ResetGame()
-        {
+        {            
             mainCanvas.Children.Clear();
-            decor.InitialDecor(mainCanvas,H, W, phaseTools);
+            decor.InitialDecor(mainCanvas, H, W, phaseTools);
             player.InitialPlayer(mainCanvas);
-            goblinEnemy.InitialGoblin(mainCanvas,player);
-            eyeEnemy.InitialEyeEnemy(mainCanvas , player);
+            goblinEnemy.InitialGoblin(mainCanvas, player);
+            eyeEnemy.InitialEyeEnemy(mainCanvas, player);
             mashroomEnemy.InitialMashroom(mainCanvas, player);
             giftPlayer.InitialGifts(mainCanvas, decor);
             phaseTools.InitialPhaseTools(mainCanvas, decor);
+            menuInterface.InitialMenuInterface(GameTimer, mainCanvas, ResetGame);
             GameTimer.Start();
             phaseTools.playerWin.Visibility = Visibility.Hidden;
         }
 
         private void ResponsiveManager()
         {
+            menuInterface.ResponsiveGui(H, W);
             player.ResponsivePlayer(H, W);
             eyeEnemy.ResponsiveEyeEnemy(player, H, W);
             goblinEnemy.ResponsiveGoblin(decor,eyeEnemy,player,mashroomEnemy,H,W);
             mashroomEnemy.ResponsivMashroom(decor, eyeEnemy, goblinEnemy, player, W, H);
             decor.ResponsiveDecor(W,H);
-            phaseTools.ResponsivePhaseTools(decor, H, W); 
+            phaseTools.ResponsivePhaseTools(decor, H, W);
         }
 
         private void WindowSizeChange(object sender, SizeChangedEventArgs e)
