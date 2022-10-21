@@ -14,31 +14,44 @@ namespace DooGame
 {
     internal class GoblinEnemy
     {
-        public Rectangle goblin;
+        public Rectangle goblin, goblinLabal;
         public Rect goblinRect;
-        public ImageBrush goblinImg;
+        public TextBlock textBlockGoblinKill = new TextBlock();
+
+        public ImageBrush goblinImg, goblinLabalImg;
         public ProgressBar goblinLife = new ProgressBar();
         public string goblinAct;
         bool goblinCanAttak;
-        double goblinCounterForChangeImgWalk = 0, goblinCounterForChangeImgAttack = 0;
+        public double goblinCounterForChangeImgWalk = 0, goblinCounterForChangeImgAttack = 0;
         int goblinSpeed = 5; 
         public GoblinEnemy()
         {
             goblin = new Rectangle();
             goblinImg = new ImageBrush();
+            goblinLabal = new Rectangle();
+            goblinLabalImg = new ImageBrush();  
         }
 
-        public void InitialGoblin(Canvas mainCanvas)
+        public void InitialGoblin(Canvas mainCanvas, Player player)
         {
+            textBlockGoblinKill.Text = $"0/{player.goblinKillCound}";
+
             goblin.Width = 50; goblin.Height = 100; goblin.Fill = goblinImg;
+            goblinLabal.Width = 40; goblinLabal.Height = 60;
+            goblinLabal.Fill = goblinLabalImg;
             goblinImg.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/goblin(enemy)/goblin_walk_R1.png"));
+            goblinLabalImg.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/goblin(enemy)/goblin_walk_R3.png"));
             goblinLife.Value = 100; goblinLife.Width = 50; goblinLife.Height = 10; goblinLife.Foreground = new SolidColorBrush(Colors.Purple);
             
             Canvas.SetLeft(goblin, 2000); Canvas.SetTop(goblin, 0);
+
             Canvas.SetTop(goblinLife, Canvas.GetTop(goblin) - goblin.Height); Canvas.SetLeft(goblinLife, Canvas.GetLeft(goblin) - (goblin.Width / 2));
           
             mainCanvas.Children.Add(goblin);
+            mainCanvas.Children.Add(goblinLabal);
             mainCanvas.Children.Add(goblinLife);
+            mainCanvas.Children.Add(textBlockGoblinKill);
+
         }
         public void SetGoblinRect()
         {
@@ -55,68 +68,69 @@ namespace DooGame
                 Canvas.SetTop(goblin, Canvas.GetTop(goblin) - goblinSpeed);
 
             }
-
             if (Canvas.GetLeft(goblin) < Canvas.GetLeft(player.player) && !goblinCanAttak)
-           {
+            {
                 Canvas.SetLeft(goblin, Canvas.GetLeft(goblin) + goblinSpeed);
                 goblinAct = "Rigth";
-           }
-           else if (Canvas.GetLeft(goblin) > Canvas.GetLeft(player.player) && !goblinCanAttak)
-           {
+            }
+            else if (Canvas.GetLeft(goblin) > Canvas.GetLeft(player.player) && !goblinCanAttak)
+            {
                 goblinAct = "Left";
                 Canvas.SetLeft(goblin, Canvas.GetLeft(goblin) - goblinSpeed);
-           }
+            }
 
-           if (goblinRect.IntersectsWith(player.playerHitBox))
-           {
+            if (goblinRect.IntersectsWith(player.playerHitBox))
+            {
                 goblinCanAttak = true;
-           }
-           else 
-           {
+            }
+            else 
+            {
                 goblinCanAttak = false;
-           }
+            }
 
-           if(!goblinCanAttak)
-           {
+            if(!goblinCanAttak)
+            {
                 if (goblinCounterForChangeImgWalk > 8)
                 {
                     goblinCounterForChangeImgWalk = 1;
                 } 
                 goblinCounterForChangeImgWalk += 0.5;
                 ChangeGoblinWalkAnimation(goblinCounterForChangeImgWalk);
-           }
-           else if (goblinCanAttak)
-           {
+            }
+            else if (goblinCanAttak)
+            {
                 if (goblinCounterForChangeImgAttack > 8)
                 {
                     goblinCounterForChangeImgAttack = 1;
                 } 
                 goblinCounterForChangeImgAttack += 0.5;
                 ChangeGoblinAttackAnimation(goblinCounterForChangeImgAttack);
-           }
+            }
 
-           if(player.playerHitBox.IntersectsWith(goblinRect) && player.playerAttack == true)
-           {
+            if(player.playerHitBox.IntersectsWith(goblinRect) && player.playerAttack == true)
+            {
                 goblinLife.Value -= 10;
 
                 if(goblinLife.Value == 0)
                 {
                     Canvas.SetLeft(goblin, 1500);
                     goblinLife.Value = 100;
+                    player.actualGoblinKillCound += 1;
+                    textBlockGoblinKill.Text = $"{player.actualGoblinKillCound}/{player.goblinKillCound}";
                 }
-           }
-            if (player.playerHitBox.IntersectsWith(goblinRect) && goblinCanAttak == true)
-            {
+            }
+             if (player.playerHitBox.IntersectsWith(goblinRect) && goblinCanAttak == true)
+             {
                 player.lifePlayer.Value -= 0.5;
                 if(player.lifePlayer.Value == 0)
                 {
                     GameTimer.Stop();
                 }
-            }
-            if (Canvas.GetLeft(goblin) < -50)
-            {
+             }
+             if (Canvas.GetLeft(goblin) < -50)
+             {
                 Canvas.SetLeft(goblin, 1500);
-            }
+             }
         }
 
         public void ChangeGoblinWalkAnimation(double x)

@@ -14,31 +14,36 @@ namespace DooGame
 {
     internal class MashroomEnemy
     {
-        public Rectangle mashroom;
+        public Rectangle mashroom, mashroomLabal;
+        public TextBlock textBlockMashroomKill = new TextBlock();
         public Rect mashroomRect;
-        public ImageBrush mashroomImg;
+        public ImageBrush mashroomImg, mashroomLabalImg;
         public ProgressBar mashroomLife = new ProgressBar();
         public string mashroomAct;
         bool mashroomCanAttak;
-        double mashroomCounterForChangeImgWalk = 0, mashroomCounterForChangeImgAttack = 0;
-        int mashroomSpeed = 7;
+        double mashroomCounterForChangeImgWalk = 0, mashroomCounterForChangeImgAttack = 0, mashroomSpeed = 7;
+        
         public MashroomEnemy()
         {
             mashroom = new Rectangle();
             mashroomImg = new ImageBrush();
+            mashroomLabal = new Rectangle();
+            mashroomLabalImg = new ImageBrush();
         }
 
-        public void InitialMashroom(Canvas mainCanvas)
+        public void InitialMashroom(Canvas mainCanvas, Player player)
         {
-            mashroom.Width = 50; mashroom.Height = 100; mashroom.Fill = mashroomImg;
+            
+            mashroom.Width = 50; mashroom.Height = 100; mashroom.Fill = mashroomImg; mashroomLabal.Fill = mashroomLabalImg;
             mashroomImg.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/mashroom(enemy)/mashroom_run/mashroom_run_L1.png"));
+            mashroomLabalImg.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/mashroom(enemy)/mashroom_run/mashroom_run_L1.png"));
             mashroomLife.Value = 100; mashroomLife.Width = 50; mashroomLife.Height = 10; mashroomLife.Foreground = new SolidColorBrush(Colors.Purple);
-
+            textBlockMashroomKill.Text = $"0/{player.mashroomKillCount}";
             Canvas.SetLeft(mashroom, 2000); Canvas.SetTop(mashroom, 0);
             Canvas.SetTop(mashroomLife, Canvas.GetTop(mashroom) - mashroom.Height); Canvas.SetLeft(mashroomLife, Canvas.GetLeft(mashroom) - (mashroom.Width / 2));
 
-            mainCanvas.Children.Add(mashroom);
-            mainCanvas.Children.Add(mashroomLife);
+            mainCanvas.Children.Add(mashroom); mainCanvas.Children.Add(mashroomLabal);
+            mainCanvas.Children.Add(mashroomLife); mainCanvas.Children.Add(textBlockMashroomKill);
         }
         public void SetMashroomRect()
         {
@@ -104,6 +109,8 @@ namespace DooGame
                 {
                     Canvas.SetLeft(mashroom, 1500);
                     mashroomLife.Value = 100;
+                    player.actualMashroomKillCount += 1;
+                    textBlockMashroomKill.Text = $"{player.actualMashroomKillCount}/{player.mashroomKillCount}";
                 }
             }
             if (player.playerHitBox.IntersectsWith(mashroomRect) && mashroomCanAttak == true)
@@ -169,5 +176,7 @@ namespace DooGame
             }
             mashroom.Fill = mashroomImg;
         }
+
+        
     }
 }

@@ -14,6 +14,24 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>http://localhost/DooGame/</UpdateUrl>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +51,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>1BADD6C6F63433AEE2BE57620BA3223F2E4F2704</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>DooGame_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -66,6 +96,7 @@
     <Compile Include="EyeEnemy.cs" />
     <Compile Include="GiftPlayer.cs" />
     <Compile Include="GoblinEnemy.cs" />
+    <Compile Include="KeyAndDoor.cs" />
     <Compile Include="MashroomEnemy.cs" />
     <Compile Include="PhysicsDecor.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -92,6 +123,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DooGame_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -104,70 +136,7 @@
     <Resource Include="images\H.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\ground4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\player.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\coinImg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\coinImage.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\G.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\enemy1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\playerWalk_R_4.png" />
-    <Resource Include="images\playerWalk_L_6.png" />
-    <Resource Include="images\playerWalk_R_6.png" />
-    <Resource Include="images\playerWalk_L_7.png" />
-    <Resource Include="images\playerWalk_R_7.png" />
-    <Resource Include="images\playerWalk_L_8.png" />
-    <Resource Include="images\playerWalk_R_8.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\playerWalk_L_3.png" />
-    <Resource Include="images\playerWalk_R_3.png" />
-    <Resource Include="images\playerWalk_L_4.png" />
-    <Resource Include="images\playerWalk_L_1.png" />
-    <Resource Include="images\playerWalk_L_2.png" />
-    <Resource Include="images\playerWalk_L_5.png" />
-    <Resource Include="images\playerWalk_R_1.png" />
-    <Resource Include="images\playerWalk_R_2.png" />
-    <Resource Include="images\playerWalk_R_5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\War.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\figmQY.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ground1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\gA.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Attack1_L_.png" />
-    <Resource Include="images\Attack1_R_.png" />
-    <Resource Include="images\Attack2_L_.png" />
-    <Resource Include="images\Attack2_R_.png" />
-    <Resource Include="images\Attack3_L_.png" />
-    <Resource Include="images\Attack3_R_.png" />
-    <Resource Include="images\Attack4_L_.png" />
-    <Resource Include="images\Attack4_R_.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\flor.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\goblin%28enemy%29\goblin_walk_L1.png" />
@@ -324,16 +293,77 @@
     <Resource Include="images\mashroom%28enemy%29\mashroom_run\mashroom_run_R8.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\florForDoo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\groundA.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\blockFromDownImg.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\blockFromUpImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\for_finish_level\door_locked_.png" />
+    <Resource Include="images\for_finish_level\door_unloked.png" />
+    <Resource Include="images\for_finish_level\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bg\bg_level_1.jpg" />
+    <Resource Include="images\bg\bg_level_10.jpg" />
+    <Resource Include="images\bg\bg_level_2.jpg" />
+    <Resource Include="images\bg\bg_level_3.jpg" />
+    <Resource Include="images\bg\bg_level_4.jpg" />
+    <Resource Include="images\bg\bg_level_5.jpg" />
+    <Resource Include="images\bg\bg_level_6.jpg" />
+    <Resource Include="images\bg\bg_level_7.jpg" />
+    <Resource Include="images\bg\bg_level_8.jpg" />
+    <Resource Include="images\bg\bg_level_9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\grounds\ground_level_1.gif" />
+    <Resource Include="images\grounds\ground_level_1.jpg" />
+    <Resource Include="images\grounds\ground_level_10.jpg" />
+    <Resource Include="images\grounds\ground_level_2.jpg" />
+    <Resource Include="images\grounds\ground_level_3.jpg" />
+    <Resource Include="images\grounds\ground_level_4.jpg" />
+    <Resource Include="images\grounds\ground_level_5.jpg" />
+    <Resource Include="images\grounds\ground_level_6.jpg" />
+    <Resource Include="images\grounds\ground_level_7.jpg" />
+    <Resource Include="images\grounds\ground_level_8.jpg" />
+    <Resource Include="images\grounds\ground_level_9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\flors\flor_level_1.gif" />
+    <Resource Include="images\flors\flor_level_1.jpg" />
+    <Resource Include="images\flors\flor_level_10.jpg" />
+    <Resource Include="images\flors\flor_level_2.jpg" />
+    <Resource Include="images\flors\flor_level_3.jpg" />
+    <Resource Include="images\flors\flor_level_4.jpg" />
+    <Resource Include="images\flors\flor_level_5.jpg" />
+    <Resource Include="images\flors\flor_level_6.jpg" />
+    <Resource Include="images\flors\flor_level_7.jpg" />
+    <Resource Include="images\flors\flor_level_8.jpg" />
+    <Resource Include="images\flors\flor_level_9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\traps\trap_down_1.png" />
+    <Resource Include="images\traps\trap_down_2.png" />
+    <Resource Include="images\traps\trap_down_3.png" />
+    <Resource Include="images\traps\trap_down_4.png" />
+    <Resource Include="images\traps\trap_down_5.png" />
+    <Resource Include="images\traps\trap_up_1.png" />
+    <Resource Include="images\traps\trap_up_2.png" />
+    <Resource Include="images\traps\trap_up_3.png" />
+    <Resource Include="images\traps\trap_up_4.png" />
+    <Resource Include="images\traps\trap_up_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

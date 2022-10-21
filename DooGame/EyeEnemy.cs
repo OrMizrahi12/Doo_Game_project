@@ -15,24 +15,31 @@ namespace DooGame
     internal class EyeEnemy 
     {
 
-        public Rectangle eyeEnemy;
+        public Rectangle eyeEnemy, eyeEnemyLabal;
         public Rect eyeEnemyRect;
-        public ImageBrush eyeEnemyImg;
+        public ImageBrush eyeEnemyImg, eyeEnemyLabalImg;
         public ProgressBar eyeEnemyLife = new ProgressBar();
         public string eyeEnemyAct;
         bool eyeEnemyCanAttak;
-        double eyeEnemyCounterForChangeImgWalk = 0, eyeEnemyCounterForChangeImgAttack = 0;
-        int eyeEnemySpeed = 3;
+        public TextBlock textBlockEyeKill = new TextBlock();
+        public double eyeEnemyCounterForChangeImgWalk = 0, eyeEnemyCounterForChangeImgAttack = 0, eyeEnemySpeed = 3;
+       
         public EyeEnemy()
         {
             eyeEnemy = new Rectangle();
             eyeEnemyImg = new ImageBrush();
+            eyeEnemyLabal = new Rectangle();
+            eyeEnemyLabalImg = new ImageBrush();
         }
 
-        public void InitialEyeEnemy(Canvas mainCanvas)
+        public void InitialEyeEnemy(Canvas mainCanvas, Player player)
         {
+            textBlockEyeKill.Text = $"0/{player.eyeKillCount}";
+
             eyeEnemyImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/eye(enemy)/eye_flight_R1.png"));
-            eyeEnemy.Width = 50; eyeEnemy.Height = 100; eyeEnemy.Fill = eyeEnemyImg;
+            eyeEnemyLabalImg.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/eye(enemy)/eye_flight_R1.png"));
+
+            eyeEnemy.Width = 50; eyeEnemy.Height = 100; eyeEnemy.Fill = eyeEnemyImg; eyeEnemyLabal.Fill = eyeEnemyLabalImg;
             eyeEnemyLife.Value = 100; eyeEnemyLife.Width = 50; eyeEnemyLife.Height = 10; 
             eyeEnemyLife.Foreground = new SolidColorBrush(Colors.Purple);
            
@@ -40,7 +47,8 @@ namespace DooGame
             Canvas.SetTop(eyeEnemyLife, Canvas.GetTop(eyeEnemy) - eyeEnemy.Height); 
             Canvas.SetLeft(eyeEnemyLife, Canvas.GetLeft(eyeEnemy) - (eyeEnemy.Width / 2)); 
            
-            mainCanvas.Children.Add(eyeEnemy); mainCanvas.Children.Add(eyeEnemyLife);
+            mainCanvas.Children.Add(eyeEnemy); mainCanvas.Children.Add(eyeEnemyLife); mainCanvas.Children.Add(eyeEnemyLabal);
+            mainCanvas.Children.Add(textBlockEyeKill);
         }
 
         public void SetEyeEnemyRect()
@@ -108,6 +116,8 @@ namespace DooGame
                 {
                     Canvas.SetLeft(eyeEnemy, 1500);
                     eyeEnemyLife.Value = 100;
+                    player.actualEyeKillCount += 1;
+                    textBlockEyeKill.Text = $"{player.actualEyeKillCount}/{player.eyeKillCount}";
                 }
             }
             if (player.playerHitBox.IntersectsWith(eyeEnemyRect) && eyeEnemyCanAttak == true)

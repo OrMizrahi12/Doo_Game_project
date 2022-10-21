@@ -19,12 +19,12 @@ namespace DooGame
         public Rectangle player;
         public Rect playerHitBox;
         public DispatcherTimer playerAttackTimerAnimation = new DispatcherTimer();
-        double counterForChangeAnimation = 0;
+        public double counterForChangeAnimation = 0, playerSpeed = 10, playerForceJump = 0;
         public ProgressBar jumpAbilityPlayer = new ProgressBar(); public ProgressBar lifePlayer = new ProgressBar();
         private string diraction, lastAct;
-        public int playerSpeed = 10;
+        public int goblinKillCound = 2, mashroomKillCount = 4, eyeKillCount = 3, actualGoblinKillCound = 0, actualMashroomKillCount = 0, actualEyeKillCount = 0;
         double playerAttackAnimationCounter = 1;
-        public bool playrRigth, playerLeft, playerJump, playerShooter ,prmisionToJump = true, playerAttack;
+        public bool playrRigth, playerLeft, playerJump, playerShooter ,prmisionToJump = true, playerAttack, playerTakeKey;
         public ImageBrush playerImg;
         public Player()
         {
@@ -38,6 +38,7 @@ namespace DooGame
         public void InitialPlayer(Canvas mainCanvas)
         {
             playerAttackTimerAnimation.Stop();
+            actualGoblinKillCound = 0; actualMashroomKillCount = 0; actualEyeKillCount = 0;
 
             player.Width = 80; player.Height = 130; player.Fill = playerImg;
             Canvas.SetTop(player, 0); Canvas.SetLeft(player, 0);        
@@ -82,7 +83,7 @@ namespace DooGame
                 lastAct = "jump";
                 jumpAbilityPlayer.Value -= 5;
                 prmisionToJump = false;
-                Canvas.SetTop(player, Canvas.GetTop(player) - H/20);
+                Canvas.SetTop(player, Canvas.GetTop(player) - playerForceJump);
             }
             if (playerAttack)
             {

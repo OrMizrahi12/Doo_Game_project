@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DooGame"
         mc:Ignorable="d"
-        Title="Doo Game" Height="450" Width="800">
+        Title="Doo Game" Height="450" Width="800" SizeChanged="WindowSizeChange">
     <Canvas Width="Auto" Height="Auto" Name="mainCanvas" Focusable="True"  Background="LightBlue" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
     </Canvas>
 </Window>
