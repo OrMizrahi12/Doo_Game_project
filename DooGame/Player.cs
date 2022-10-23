@@ -170,7 +170,7 @@ namespace DooGame
             {
                 lifePlayer.Foreground = new SolidColorBrush(Colors.Red);
             }
-            if (lifePlayer.Value < 1)
+            if (lifePlayer.Value <= 0)
             {
                 menuInterface.ShowGameOverCanvas();
                 GamrTimer.Stop();

@@ -116,10 +116,6 @@ namespace DooGame
             if (player.playerHitBox.IntersectsWith(mashroomRect) && mashroomCanAttak == true)
             {
                 player.lifePlayer.Value -= 0.5;
-                if (player.lifePlayer.Value == 0)
-                {
-                    GameTimer.Stop();
-                }
             }
             if (Canvas.GetLeft(mashroom) < -50)
             {

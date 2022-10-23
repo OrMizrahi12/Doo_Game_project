@@ -87,15 +87,15 @@ namespace DooGame
         }
         public void RemoveElemenntsFromCanvas(Canvas mainCanvas)
         {
-            mainCanvas.Children.Remove(starterCanvas);
-            mainCanvas.Children.Remove(btnMenu);
-            mainCanvas.Children.Remove(gameOverCanvas);
             gameOverCanvas.Children.Remove(btnGameOver);
             guiCanvas.Children.Remove(btnReset);
             guiCanvas.Children.Remove(btnBack);
-            mainCanvas.Children.Remove(guiCanvas);
             starterCanvas.Children.Remove(btnPlay);
             winCanvas.Children.Remove(btnContinu);
+            mainCanvas.Children.Remove(starterCanvas);
+            mainCanvas.Children.Remove(btnMenu);
+            mainCanvas.Children.Remove(gameOverCanvas);
+            mainCanvas.Children.Remove(guiCanvas);
         }
         public void AddElementToCanvas(Canvas mainCanvas)
         {

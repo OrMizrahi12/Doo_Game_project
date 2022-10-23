@@ -120,10 +120,6 @@ namespace DooGame
             if (player.playerHitBox.IntersectsWith(eyeEnemyRect) && eyeEnemyCanAttak == true)
             {
                 player.lifePlayer.Value -= 1;
-                if (player.lifePlayer.Value == 0)
-                {
-                    GameTimer.Stop();
-                }
             }
             if(Canvas.GetLeft(eyeEnemy) < -50)
             {

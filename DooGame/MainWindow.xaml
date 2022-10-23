@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:DooGame"
         mc:Ignorable="d"
         Title="Doo Game" Height="450" Width="800" SizeChanged="WindowSizeChange">
-    <Canvas Width="Auto" Height="Auto" Name="mainCanvas" Focusable="True"  Background="LightBlue" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
-    </Canvas>
+    <StackPanel x:Name="panel" >
+        <Canvas Width="Auto" Height="Auto" Name="mainCanvas" Focusable="True"  Background="LightBlue" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
+            <!--<Button x:Name="save" Content="save" Width="30" Height="19" Click="save_Click" Canvas.Left="768" Canvas.Top="107"/>
+            <Button x:Name="load" Content="load" Width="30" Height="19" Click="load_Click" Canvas.Left="768" Canvas.Top="80"/>-->
+        </Canvas>
+
+    </StackPanel>
 </Window>

@@ -264,13 +264,13 @@ namespace DooGame
         {
                     
             if (Canvas.GetLeft(background1) < -background1.Width)
-                Canvas.SetLeft(background1, background2.Width - 15);
+                Canvas.SetLeft(background1, background2.Width - 30);
             if (Canvas.GetLeft(background2) < -background2.Width)
-                Canvas.SetLeft(background2, background1.Width - 15);
+                Canvas.SetLeft(background2, background1.Width - 30);
             if (Canvas.GetLeft(background2) > background2.Width)
-                Canvas.SetLeft(background2, -background1.Width + 15);
+                Canvas.SetLeft(background2, -background1.Width + 30);
             if (Canvas.GetLeft(background1) > background1.Width)
-                Canvas.SetLeft(background1, -background2.Width + 15);
+                Canvas.SetLeft(background1, -background2.Width + 30);
             if (Canvas.GetLeft(flor1) < -flor1.Width)
                 Canvas.SetLeft(flor1, flor2.Width - 15);
             if (Canvas.GetLeft(flor2) < -flor2.Width)

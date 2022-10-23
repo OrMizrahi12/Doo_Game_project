@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Akavache;
+using DooGame.Properties;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Net.Configuration;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +14,16 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+
+
+
+
 
 namespace DooGame
 {
@@ -43,12 +53,6 @@ namespace DooGame
             mainCanvas.Focus();
             GameTimer.Tick += GameEngine;
             GameTimer.Interval = TimeSpan.FromMilliseconds(20);
-        }
-
-        public interface ISupportState<T>
-        {
-            void RestoreState(T state);
-            T SaveState();
         }
 
         private void GameEngine(object sender, EventArgs e)
@@ -105,9 +109,21 @@ namespace DooGame
             {
                 player.playerAttack = true;
             }
-  
+            
+            else if(e.Key == Key.S)
+            {
+                Settings.Default.SaveLevel = phaseTools.level;
+                
+            }
+            else if(e.Key == Key.G)
+            {
+                phaseTools.level =  Settings.Default.SaveLevel;
+                ResetGame();
+
+            }
+
         }
-        
+
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Right)
@@ -125,7 +141,7 @@ namespace DooGame
             else if (e.Key == Key.D)
             {
                 player.playerAttack = false;
-            }  
+            } 
         }
 
         private void ResetGame()
@@ -159,7 +175,32 @@ namespace DooGame
             player.LocatePlayerAfterLoading();
             phaseTools.LocatePhaseToolsAfterLoading(decor);
         }
+
+        private void save_Click(object sender, RoutedEventArgs e)
+        {
+            FileStream fs = File.Open(@"C:\Desktop\MainWindow.xaml", FileMode.Create);
+            XamlWriter.Save(mainCanvas, fs);
+            fs.Close();
+        }
+
+        private void load_Click(object sender, RoutedEventArgs e)
+        {
+            FileStream fs = File.Open(@"C:\Desktop\MainWindow.xaml", FileMode.Open, FileAccess.Read);
+            Canvas savedCanvas = XamlReader.Load(fs) as Canvas;
+            fs.Close();
+
+            mainCanvas.Children.Add(savedCanvas);
+
+        }
+
+
+
+
+
     }
+
+
+
 }
 
 

@@ -119,10 +119,6 @@ namespace DooGame
              if (player.playerHitBox.IntersectsWith(goblinRect) && goblinCanAttak == true)
              {
                 player.lifePlayer.Value -= 0.5;
-                if(player.lifePlayer.Value == 0)
-                {
-                    GameTimer.Stop();
-                }
              }
              if (Canvas.GetLeft(goblin) < -50)
              {
