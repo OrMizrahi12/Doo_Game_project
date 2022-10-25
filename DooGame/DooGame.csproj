@@ -120,20 +120,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EyeEnemy.cs" />
-    <Compile Include="GiftPlayer.cs" />
-    <Compile Include="GoblinEnemy.cs" />
-    <Compile Include="MenuInterface.cs" />
-    <Compile Include="PhaseToolsLevel .cs" />
-    <Compile Include="MashroomEnemy.cs" />
-    <Compile Include="PhysicsDecor.cs" />
+    <Compile Include="Classes\Characters\EyeEnemy.cs" />
+    <Compile Include="Classes\InanimateObjects\GiftPlayer.cs" />
+    <Compile Include="Classes\Characters\GoblinEnemy.cs" />
+    <Compile Include="Classes\Gui\MenuInterface.cs" />
+    <Compile Include="Classes\InanimateObjects\PhaseToolsLevel .cs" />
+    <Compile Include="Classes\Characters\MashroomEnemy.cs" />
+    <Compile Include="Classes\InanimateObjects\PhysicsDecor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player.cs" />
+    <Compile Include="Classes\Characters\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -413,5 +413,6 @@
   <ItemGroup>
     <Resource Include="images\menuInterface\btnBackPressed.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

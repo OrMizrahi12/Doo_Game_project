@@ -31,7 +31,7 @@ namespace DooGame
             eyeEnemyLabal = new Rectangle();
             eyeEnemyLabalImg = new ImageBrush();
         }
-
+        
         public void InitialEyeEnemy(Canvas mainCanvas, Player player)
         {
             textBlockEyeKill.Text = $"0/{player.eyeKillCount}";
